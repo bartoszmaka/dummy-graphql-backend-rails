@@ -5,3 +5,12 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+users = FactoryBot.create_list(:user, 10)
+
+users.each do |user|
+  FactoryBot.create_list(:article, rand(1..5), user: user)
+end
+
+Article.all.each do |article|
+  FactoryBot.create_list(:comment, rand(1..3), user: users.sample, article: article)
+end
